@@ -73,7 +73,7 @@ def login_page():
             user = DBOperations.get_user_by_username(username)
             if user and user["pass_usu"] == password:
                 st.session_state.user = dict(user)
-                st.experimental_rerun()
+                st.rerun()
             else:
                 st.error("Usuario o contraseña incorrectos")
     
@@ -81,7 +81,7 @@ def login_page():
         st.subheader("Registrarse")
         if st.button("Soy nuevo paciente"):
             st.session_state.registrando = True
-            st.experimental_rerun()
+            st.rerun()
 
 def register_page():
     st.title("📝 Registro de Nuevo Paciente")
@@ -104,13 +104,13 @@ def register_page():
                 if DBOperations.create_user(username, password, nombre, apellido, dni, edad, sexo, "paciente"):
                     st.success("Registro exitoso. Por favor inicie sesión.")
                     st.session_state.registrando = False
-                    st.experimental_rerun()
+                    st.rerun()
                 else:
                     st.error("Error al registrar el usuario")
     
     if st.button("Volver al inicio"):
         st.session_state.registrando = False
-        st.experimental_rerun()
+        st.rerun()
 
 def admin_dashboard():
     st.title("⚙️ Panel de Administración")
@@ -226,7 +226,7 @@ def professional_dashboard():
                                 st.success("Diagnóstico guardado exitosamente")
                                 if os.path.exists(temp_path):
                                     os.remove(temp_path)
-                                st.experimental_rerun()
+                                st.rerun()
                             else:
                                 st.error("Error al guardar el diagnóstico")
                 except Exception as e:
@@ -310,7 +310,7 @@ def main():
             if st.button("🔒 Cerrar sesión"):
                 st.session_state.user = None
                 st.session_state.registrando = False
-                st.experimental_rerun()
+                st.rerun()
         
         # Mostrar dashboard según rol
         if st.session_state.user['rol_usu'] == 'admin':
