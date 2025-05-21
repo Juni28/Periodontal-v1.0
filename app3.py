@@ -40,12 +40,12 @@ def login():
             st.session_state.logged_in = True
             st.session_state.current_user = username
             st.success(f"Bienvenido {username}")
-            st.experimental_rerun()  # Force a rerun to update the UI
+            
         else:
             st.error("Usuario o contraseña incorrectos")
     if st.button("Registrarse"):
         st.session_state.registering = True
-        st.experimental_rerun()  # Force a rerun to update the UI
+        
 
 def register():
     st.title("📝 Registrarse")
@@ -75,10 +75,10 @@ def register():
             st.session_state.historial[username] = []
             st.success("Usuario registrado correctamente. Por favor, inicia sesión.")
             st.session_state.registering = False
-            st.experimental_rerun()  # Force a rerun to update the UI
+            
     if st.button("Volver al inicio de sesión"):
         st.session_state.registering = False
-        st.experimental_rerun()  # Force a rerun to update the UI
+        
 
 def admin_panel():
     st.title("⚙️ Panel de Administración de Usuarios")
@@ -235,7 +235,7 @@ st.sidebar.markdown("---")
 if st.sidebar.button("🔓 Cerrar sesión"):
     st.session_state.logged_in = False
     st.session_state.current_user = ""
-    st.experimental_rerun()  # Force a rerun to update the UI
+    
 
 # Admin Panel solo para el admin
 if st.session_state.current_user == "admin":
